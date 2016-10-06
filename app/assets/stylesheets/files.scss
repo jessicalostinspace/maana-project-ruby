@@ -1,0 +1,19 @@
+// Place all the styles related to the Files controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body{
+	font-family: sans-serif;
+}
+.main{
+	margin: auto;
+	width: 40%;
+	border: 3px solid green;
+	padding: 5px;
+}
+.files{
+	padding-left: 25%;
+}
+h1{
+	text-align: center;
+}
