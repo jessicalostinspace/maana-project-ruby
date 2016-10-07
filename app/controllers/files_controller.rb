@@ -1,14 +1,35 @@
+require 'find'
+# require 'zip'
+
 class FilesController < ApplicationController
   def index
-  	path_name = params[:path_name]
+  	count_array = []
 
-  	puts path_name
+  	path_name = params[:path_name]
 
   	dir = File.dirname(path_name.to_s)
 
-  	puts dir
+  	if File.exist?(path_name.to_s)
+  		Find.find(path_name.to_s) do |path|
+  			if path =~ /\.zip$/
+  				extract_zip(path, path.chomp('.zip'))
+  			end 
 
-  	puts File.exist?(path_name.to_s)
+  			#If path is txt file, open, count words, and put wc into array
+  			if path =~ /\.txt$/
+  				file = File.open(path, "r")
+
+  				count = 0
+
+  				file.each_line do |line|
+  					count += line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).split.size
+  				end	
+
+  				count_array.push(count)
+  				puts count_array
+  			end
+  		end
+  	end	
 
   end
 end
