@@ -26,10 +26,16 @@ class FilesController < ApplicationController
   				end	
 
   				count_array.push(count)
-  				puts count_array
   			end
   		end
+  		count_array = count_array.sort
+  		puts count_array
+  		
   	end	
 
+  	# render json: count_array
+
   end
+
+
 end
