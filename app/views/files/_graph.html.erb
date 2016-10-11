@@ -1,0 +1,44 @@
+
+        <p>YOLO</p>
+
+         	 	<% @counts.each do |pair| %>
+	        		<%= "#{pair}," %>
+        		<% end %>
+
+
+       <script type="text/javascript">
+		google.charts.load('current', {packages: ['corechart', 'bar']});
+		google.charts.setOnLoadCallback(drawRightY);
+
+		function drawRightY() {
+      var data = google.visualization.arrayToDataTable([
+			        ['Word Count', 'Occurences'],
+					<% last = @counts.pop %>
+					<% @counts.each do |pair| %>
+					<%= "[#{pair[0].to_s},#{pair[1]}]," %>
+					<% end %>
+					<%= "[#{last[0].to_s},#{last[1]}]" %>
+		      ]);
+
+      var options = {
+        chart: {
+          title: 'Word Count Occurences',
+          // subtitle: 'Based on most recent and previous census data'
+        },
+        hAxis: {
+          title: 'Word Count',
+          minValue: 0,
+        },
+        vAxis: {
+          title: 'Occurences'
+        },
+        bars: 'horizontal',
+        axes: {
+          y: {
+            0: {side: 'right'}
+          }
+        }
+      };
+      var material = new google.charts.Bar(document.getElementById('chart_div'));
+      material.draw(data, options);
+    }

@@ -13,4 +13,10 @@
 	</div>
 </div>
 
-<div><%= render "graph" %></div>
+<div id='chart_div'>
+
+<% if @counts %>
+	<%= render(:partial => "graph")%> 
+<% end %>
+
+</div>

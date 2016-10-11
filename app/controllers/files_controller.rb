@@ -28,12 +28,11 @@ class FilesController < ApplicationController
   				count_array.push(count)
   			end
   		end
-  		count_array = count_array.sort
-  		puts count_array
+  		@count_array = count_array.sort
+  		@counts = count_array.group_by{|i| i}.map{|k,v| [k, v.count] }
+  		puts @count_array
   		
   	end	
-
-  	# render json: count_array
 
   end
 
