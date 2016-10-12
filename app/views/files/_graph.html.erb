@@ -1,17 +1,10 @@
 
-        <p>YOLO</p>
+<script type="text/javascript">
+	google.charts.load('current', {packages: ['corechart', 'bar']});
+	google.charts.setOnLoadCallback(drawBasic);
 
-         	 	<% @counts.each do |pair| %>
-	        		<%= "#{pair}," %>
-        		<% end %>
-
-
-       <script type="text/javascript">
-		google.charts.load('current', {packages: ['corechart', 'bar']});
-		google.charts.setOnLoadCallback(drawRightY);
-
-		function drawRightY() {
-      var data = google.visualization.arrayToDataTable([
+	function drawBasic() {
+	  var data = google.visualization.arrayToDataTable([
 			        ['Word Count', 'Occurences'],
 					<% last = @counts.pop %>
 					<% @counts.each do |pair| %>
@@ -20,25 +13,36 @@
 					<%= "[#{last[0].to_s},#{last[1]}]" %>
 		      ]);
 
-      var options = {
-        chart: {
-          title: 'Word Count Occurences',
-          // subtitle: 'Based on most recent and previous census data'
-        },
-        hAxis: {
-          title: 'Word Count',
-          minValue: 0,
-        },
-        vAxis: {
-          title: 'Occurences'
-        },
-        bars: 'horizontal',
-        axes: {
-          y: {
-            0: {side: 'right'}
-          }
-        }
-      };
-      var material = new google.charts.Bar(document.getElementById('chart_div'));
-      material.draw(data, options);
-    }
+	  var options = {
+	    chart: {
+		      title: 'Word Count Occurences',
+		      // subtitle: 'Based on most recent and previous census data'
+		    },
+		    hAxis: {
+		      title: 'Word Count',
+		      minValue: 0,
+		      // baselin: 1,
+		    },
+		    vAxis: {
+		      title: 'Occurences',
+		      direction: -1,
+		    },
+		    bars: 'horizontal',
+		    axes: {
+		      y: {
+		        0: {side: 'left'}
+		      },
+		      x: {
+		      	0: {side: 'bottom'}
+		      },
+		    },
+		    legend: {
+		    	position: 'none',
+		    },
+		    bar: { groupWidth: "70%" },
+		  };
+  var material = new google.charts.Bar(document.getElementById('chart_div'));
+  material.draw(data, options);
+}
+
+</script>
