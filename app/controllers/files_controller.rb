@@ -33,6 +33,7 @@ class FilesController < ApplicationController
   		puts @count_array
   		
   	end	
+  	# Else is file path DNE, flash errors
 
   end
 
